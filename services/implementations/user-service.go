@@ -1,11 +1,28 @@
 package implementations
 
-import "github.com/jdpadillaac/go-mysql-api/services/interfaces"
+import (
+	"github.com/jdpadillaac/go-mysql-api/models"
+	"github.com/jdpadillaac/go-mysql-api/repository"
+)
 
-type UserService struct {
-	storage interfaces.UserStorage
+type UserService interface {
+	Create(user models.User) (models.User, bool)
 }
 
-func NewUserService(s interfaces.UserStorage) *UserService{
-	return &UserService{s}
+type userService struct {}
+
+var (
+	repo repository.UserRepository
+)
+
+func NewUserService(repository repository.UserRepository) UserService{
+	repo = repository
+	return  &userService{}
 }
+
+func (u *userService) Create(user models.User) (models.User, bool) {
+	result,_ := repo.Save(user)
+	return result, true
+}
+
+

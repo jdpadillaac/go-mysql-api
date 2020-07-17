@@ -8,10 +8,11 @@ import (
 	"os"
 )
 
+
 func Handlers() {
 
 	router := mux.NewRouter()
-
+	userRoutes(router)
 
 	PORT := os.Getenv("PORT")
 	if PORT == "" {
