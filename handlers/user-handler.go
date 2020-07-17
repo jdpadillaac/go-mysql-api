@@ -11,7 +11,7 @@ import (
 func userRoutes(r *mux.Router) {
 
 	userStorage := repository.NewUserRepository(repository.Pool())
-	userSrv := implementations.NewUserService(userStorage)
+	userSrv := implementations.NewUserService(&userStorage)
 	userCtr := controllers.NewUserController(userSrv)
 
 	r.HandleFunc("/api/user", userCtr.CreateNewUser ).Methods("POST")

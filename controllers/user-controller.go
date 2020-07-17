@@ -19,7 +19,7 @@ type UserController interface {
 }
 
 
-func NewUserController(service  implementations.UserService) UserController{
+func NewUserController(service implementations.UserService) UserController{
 	postService = service
 	return &userController{}
 }
